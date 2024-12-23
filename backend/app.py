@@ -1,12 +1,13 @@
 from contextlib import asynccontextmanager
 from typing import List
 
-from database.db import init_db
-from database.transcription_table import TranscriptionTable
 from fastapi import FastAPI, APIRouter
 from fastapi import File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+
+from database.db import init_db
+from database.transcription_table import TranscriptionTable
 from schemas.transcriptions import Transcription
 from services import whisper
 
@@ -54,16 +55,10 @@ async def transcribe_audio(file: UploadFile = File(...)):
     try:
         transcribed_text = await whisper.transcribe_audio_file(file)
 
-        # Save to database table
-        query = TranscriptionTable.insert().values(
-            filename=file.filename,
-            transcribed_text=transcribed_text
-        )
-
-        last_record_id = await TranscriptionTable.execute(query)
+        result = TranscriptionTable.create_transcription(filename=file.filename, transcribed_text=transcribed_text)
 
         # Return the saved transcription
-        return await TranscriptionTable.get_transcription_by_id(last_record_id)
+        return JSONResponse(status_code=200, content={"result": result})
 
     except Exception as e:
         raise JSONResponse(status_code=500, content={"error": str(e)})
@@ -73,7 +68,8 @@ async def transcribe_audio(file: UploadFile = File(...)):
 async def get_transcriptions():
     try:
         transcriptions = TranscriptionTable.get_all_transcriptions()
-        return transcriptions
+        return JSONResponse(status_code=200, content={"result": transcriptions})
+
     except Exception as e:
         raise JSONResponse(status_code=500, content={"error": str(e)})
 
@@ -82,7 +78,7 @@ async def get_transcriptions():
 async def search_transcriptions(filename: str):
     try:
         results = TranscriptionTable.search_transcriptions(filename)
-        return results
+        return JSONResponse(status_code=200, content={"result": results})
     except Exception as e:
         raise JSONResponse(status_code=500, content={"error": str(e)})
 
