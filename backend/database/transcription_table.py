@@ -14,6 +14,7 @@ class TranscriptionTable:
             cursor = conn.cursor()
             result = cursor.execute(sql, (filename, transcribed_text))
             row = result.fetchone()
+            conn.commit()
             return dict(row)
 
     @staticmethod
