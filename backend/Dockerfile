@@ -7,7 +7,8 @@ WORKDIR /app
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
-    build-essential
+    build-essential \
+    libsndfile1
 
 # Copy requirements and install Python packages
 COPY requirements.txt .
@@ -20,4 +21,4 @@ COPY .. .
 EXPOSE 5000
 
 # Start FastAPI app with Uvicorn
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000", "--log-level debug"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000", "--log-level", "debug"]
