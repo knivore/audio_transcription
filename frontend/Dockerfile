@@ -19,6 +19,5 @@ RUN npm run build
 # Expose the port the Next.js app runs on
 EXPOSE 3000
 
-# Command to start the app on 0.0.0.0
-CMD ["npm", "run", "start", "--", "--hostname", "0.0.0.0"]
-#CMD ["npm", "run", "start"]
+# Command to start the app
+CMD ["npm", "run", "start"]
