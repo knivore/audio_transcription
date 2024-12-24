@@ -52,6 +52,16 @@ pip install -r backend/requirements.txt
 - Click on the cloud upload button to perform audio transcribing using hugging face's openai/whisper-tiny
 
 
+### Performing Unit Test (Backend)
+
+- To perform backend unit test, you can begin by running the following Bash Script
+
+```
+./unit_test.sh
+```
+
+
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [Python.org]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54

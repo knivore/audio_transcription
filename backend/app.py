@@ -50,7 +50,7 @@ async def health_check():
 @api_router.post("/transcribe")
 async def transcribe_audio(file: UploadFile = File(...)):
     if not file.filename.endswith(('.mp3', '.wav', '.m4a')):
-        raise JSONResponse(status_code=400, content={"message": "Unsupported file format"})
+        return JSONResponse(status_code=400, content={"message": "Unsupported file format"})
 
     try:
         transcribed_text = await whisper.transcribe_audio_file(file)
@@ -61,7 +61,7 @@ async def transcribe_audio(file: UploadFile = File(...)):
         return JSONResponse(status_code=200, content={"result": result})
 
     except Exception as e:
-        raise JSONResponse(status_code=500, content={"error": str(e)})
+        return JSONResponse(status_code=500, content={"error": str(e)})
 
 
 @api_router.get("/transcriptions", response_model=List[Transcription])
@@ -71,7 +71,7 @@ async def get_transcriptions():
         return JSONResponse(status_code=200, content={"result": transcriptions})
 
     except Exception as e:
-        raise JSONResponse(status_code=500, content={"error": str(e)})
+        return JSONResponse(status_code=500, content={"error": str(e)})
 
 
 @api_router.get("/search")
@@ -80,7 +80,7 @@ async def search_transcriptions(query: str):
         results = TranscriptionTable.search_transcriptions(query)
         return JSONResponse(status_code=200, content={"result": results})
     except Exception as e:
-        raise JSONResponse(status_code=500, content={"error": str(e)})
+        return JSONResponse(status_code=500, content={"error": str(e)})
 
 
 app.include_router(api_router, prefix=api_prefix)
