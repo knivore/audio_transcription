@@ -40,10 +40,10 @@ class TranscriptionTable:
 
     @staticmethod
     def search_transcriptions(search_term: str) -> list:
-        """Search transcriptions by filename."""
+        """Search transcriptions by filename or transcribed text that contains search term."""
         sql = """
         SELECT * FROM transcriptions 
-        WHERE filename LIKE ? OR transcribed_text LIKE ?
+        WHERE LOWER(filename) LIKE LOWER(?) OR LOWER(transcribed_text) LIKE LOWER(?)
         ORDER BY created_at DESC;
         """
         search_pattern = f"%{search_term}%"

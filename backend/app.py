@@ -75,9 +75,9 @@ async def get_transcriptions():
 
 
 @api_router.get("/search")
-async def search_transcriptions(filename: str):
+async def search_transcriptions(query: str):
     try:
-        results = TranscriptionTable.search_transcriptions(filename)
+        results = TranscriptionTable.search_transcriptions(query)
         return JSONResponse(status_code=200, content={"result": results})
     except Exception as e:
         raise JSONResponse(status_code=500, content={"error": str(e)})
