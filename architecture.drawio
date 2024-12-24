@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
+  <diagram name="Graph" id="0">
+    <mxGraphModel dx="1242" dy="705" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="frontendGroup" value="Frontend (React SPA)" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="50" y="50" width="300" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="UI" value="User Interface" style="ellipse;whiteSpace=wrap;" parent="frontendGroup" vertex="1">
+          <mxGeometry x="20" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Upload" value="File Upload Component" style="ellipse;whiteSpace=wrap;" parent="frontendGroup" vertex="1">
+          <mxGeometry x="20" y="90" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Search" value="Search Component" style="ellipse;whiteSpace=wrap;" parent="frontendGroup" vertex="1">
+          <mxGeometry x="20" y="150" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TransList" value="Transcription Table" style="ellipse;whiteSpace=wrap;" parent="frontendGroup" vertex="1">
+          <mxGeometry x="20" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="backendGroup" value="Backend (FastAPI)" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="400" y="50" width="300" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="API" value="REST API Endpoints" style="ellipse;whiteSpace=wrap;" parent="backendGroup" vertex="1">
+          <mxGeometry x="20" y="70" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Whisper" value="Whisper Model" style="ellipse;whiteSpace=wrap;" parent="backendGroup" vertex="1">
+          <mxGeometry x="170" y="100" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PreProc" value="Audio Preprocessing" style="ellipse;whiteSpace=wrap;" parent="backendGroup" vertex="1">
+          <mxGeometry x="170" y="40" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DB_Layer" value="Database Layer" style="ellipse;whiteSpace=wrap;" parent="backendGroup" vertex="1">
+          <mxGeometry x="20" y="230" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="databaseGroup" value="SQLite Database" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="750" y="250" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Tables" value="Transcriptions Table" style="ellipse;whiteSpace=wrap;" parent="databaseGroup" vertex="1">
+          <mxGeometry x="20" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="externalGroup" value="External Services" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="750" y="120" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HF" value="HuggingFace Hub" style="ellipse;whiteSpace=wrap;" parent="externalGroup" vertex="1">
+          <mxGeometry x="20" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="connection1" parent="1" source="UI" target="API" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection2" parent="1" source="Upload" target="API" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection3" parent="1" source="Search" target="API" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection4" parent="1" source="TransList" target="API" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection5" parent="1" source="API" target="Whisper" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection6" parent="1" source="API" target="PreProc" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection7" parent="1" source="API" target="DB_Layer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection8" parent="1" source="Whisper" target="HF" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection9" parent="1" source="DB_Layer" target="Tables" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
