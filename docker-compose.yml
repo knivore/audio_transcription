@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: http://localhost:5000
+      NEXT_PUBLIC_BACKEND_API_PATH: /api
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend:latest
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_PATH: transcriptions.db
+

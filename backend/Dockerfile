@@ -6,8 +6,8 @@ WORKDIR /app
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
+    gcc \
+    build-essential
 
 # Copy requirements and install Python packages
 COPY requirements.txt .
